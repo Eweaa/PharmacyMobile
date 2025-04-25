@@ -1,0 +1,48 @@
+class AppLocalizations {
+  static Map<String, Map<String, String>> _localizedValues = {
+    'en': {
+      'app_menu': 'App Menu',
+      'dashboard': 'Dashboard',
+      'settings': 'Settings',
+      'profile': 'Profile',
+      'help': 'Help',
+      'inactive_users': 'Inactive Users',
+      'active_users': 'Active Users',
+      'logout': 'Logout',
+      'login_title': 'Login',
+      'email': 'Email',
+      'password': 'Password',
+      'next': 'Next',
+      'email_invalid': 'Invalid email',
+      'password_invalid': 'Invalid password',
+      'email_required': 'Email is required',
+      'password_required': 'Password is required',
+      'login_failed': 'Login failed',
+      'login_successful': 'Login successful',
+    },
+    'ar': {
+      'app_menu': 'قائمة التطبيق',
+      'dashboard': 'لوحة التحكم',
+      'settings': 'الإعدادات',
+      'profile': 'الملف الشخصي',
+      'help': 'المساعدة',
+      'inactive_users': 'المستخدمين غير النشطين',
+      'active_users': 'المستخدمين النشطين',
+      'logout': 'تسجيل خروج',
+      'login_title': 'تسجيل الدخول',
+      'email': 'البريد الإلكتروني',
+      'password': 'كلمة المرور',
+      'next': 'التالي', 
+      'email_invalid': 'بريد إلكتروني غير صالح',
+      'password_invalid': 'كلمة المرور غير صالحة',
+      'email_required': 'البريد الإلكتروني مطلوب',
+      'password_required': 'كلمة المرور مطلوبة',
+      'login_failed': 'فشل تسجيل الدخول',
+      'login_successful': 'تم تسجيل الدخول بنجاح',
+    },
+  };
+
+  static String translate(String key, String languageCode) {
+    return _localizedValues[languageCode]?[key] ?? key;
+  }
+}
