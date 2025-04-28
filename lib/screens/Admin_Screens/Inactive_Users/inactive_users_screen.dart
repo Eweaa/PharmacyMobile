@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:provider/provider.dart';
-import '../providers/auth_provider.dart';
-import '../widgets/admin_layout.dart';
-import '../models/base_response.dart';
-import '../models/user.dart';
+
+import '../../../layouts/admin_layout.dart';
+import '../../../models/base_response.dart';
+import '../../../models/user.dart';
+import '../../../providers/auth_provider.dart';
 
 class InactiveUsersScreen extends StatefulWidget {
   const InactiveUsersScreen({super.key});

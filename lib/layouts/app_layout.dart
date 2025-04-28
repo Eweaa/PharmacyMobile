@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/language_provider.dart';
 import '../l10n/app_localizations.dart';
-import '../screens/inactive_users_screen.dart';
+import '../screens/Admin_Screens/Inactive_Users/inactive_users_screen.dart';
 import '../screens/settings_screen.dart';
-import '../screens/login_screen.dart';
+import '../screens/Shared/login_screen.dart';
 import '../screens/home_screen.dart';
 import '../providers/auth_provider.dart';
 

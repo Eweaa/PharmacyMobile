@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:test_applicaiton_1/providers/auth_provider.dart';
+import 'package:test_applicaiton_1/screens/Shared/splash_screen.dart';
 import 'package:test_applicaiton_1/styles/colors.dart';
-import 'screens/splash_screen.dart';
 import 'providers/language_provider.dart';
 
 void main() async {

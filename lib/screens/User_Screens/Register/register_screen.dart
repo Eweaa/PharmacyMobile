@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_applicaiton_1/l10n/app_localizations.dart';
 import 'package:test_applicaiton_1/providers/language_provider.dart';
-import 'package:test_applicaiton_1/screens/login_screen.dart';
-import 'package:test_applicaiton_1/screens/register_location_screen.dart';
+import 'package:test_applicaiton_1/screens/User_Screens/Register/register_location_screen.dart';
+import 'package:test_applicaiton_1/screens/Shared/login_screen.dart';
 import 'package:test_applicaiton_1/styles/colors.dart';
 
 class RegisterScreen extends StatefulWidget {

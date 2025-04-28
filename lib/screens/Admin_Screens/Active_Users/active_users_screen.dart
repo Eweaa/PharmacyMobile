@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:test_applicaiton_1/l10n/app_localizations.dart';
 import 'package:test_applicaiton_1/providers/language_provider.dart';
 import 'package:test_applicaiton_1/styles/colors.dart';
 import 'package:http/http.dart' as http;

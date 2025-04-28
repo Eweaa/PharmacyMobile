@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../widgets/user_layout.dart';
-import '../providers/auth_provider.dart';
+
+import '../../../layouts/user_layout.dart';
+import '../../../providers/auth_provider.dart';
 
 class UserHomeScreen extends StatefulWidget {
   const UserHomeScreen({super.key});
