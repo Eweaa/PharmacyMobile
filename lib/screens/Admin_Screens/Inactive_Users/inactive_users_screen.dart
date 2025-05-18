@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:provider/provider.dart';
+import 'package:test_applicaiton_1/l10n/app_localizations.dart';
+import 'package:test_applicaiton_1/providers/language_provider.dart';
 
 import '../../../layouts/admin_layout.dart';
 import '../../../models/base_response.dart';
@@ -136,8 +138,12 @@ class _InactiveUsersScreenState extends State<InactiveUsersScreen> {
 
   @override
   Widget build(BuildContext context) {
+    
+    final languageProvider = Provider.of<LanguageProvider>(context);
+    final lang = languageProvider.currentLocale.languageCode;
+
     return AdminLayout(
-      title: 'Inactive Users',
+      title: AppLocalizations.translate('inactive_Users', lang),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

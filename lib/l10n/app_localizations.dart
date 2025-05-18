@@ -19,6 +19,13 @@ class AppLocalizations {
       'password_required': 'Password is required',
       'login_failed': 'Login failed',
       'login_successful': 'Login successful',
+      'ads_List': 'Ads List',
+      'create_Ad': 'Create Ad',
+      'description': 'Description',
+      'phoneNumber': 'Phone Number',
+     'startDate': 'Start Date',
+     'city': 'City',
+     'area': 'Area',
     },
     'ar': {
       'app_menu': 'قائمة التطبيق',
@@ -39,6 +46,13 @@ class AppLocalizations {
       'password_required': 'كلمة المرور مطلوبة',
       'login_failed': 'فشل تسجيل الدخول',
       'login_successful': 'تم تسجيل الدخول بنجاح',
+      'ads_List': 'قائمة الإعلانات',
+      'create_Ad': 'إنشاء إعلان',
+      'description': 'الوصف',
+      'phoneNumber': 'رقم الهاتف',
+      'startDate': 'تاريخ البداية',
+     'city': 'المدينة',
+     'area': 'المنطقة',
     },
   };
 

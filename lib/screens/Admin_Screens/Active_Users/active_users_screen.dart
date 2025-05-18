@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_applicaiton_1/l10n/app_localizations.dart';
+import 'package:test_applicaiton_1/layouts/admin_layout.dart';
 import 'package:test_applicaiton_1/providers/language_provider.dart';
 import 'package:test_applicaiton_1/styles/colors.dart';
 import 'package:http/http.dart' as http;
@@ -57,12 +59,9 @@ class _ActiveUsersScreenState extends State<ActiveUsersScreen> {
     final languageProvider = Provider.of<LanguageProvider>(context);
     final lang = languageProvider.currentLocale.languageCode;
     
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Active Users'),
-        backgroundColor: Colorz.blue,
-      ),
-      body: _isLoading
+    return AdminLayout(
+      title: AppLocalizations.translate('active_Users', lang),
+      child: _isLoading
           ? Center(child: CircularProgressIndicator())
           : _errorMessage.isNotEmpty
               ? Center(child: Text(_errorMessage, style: TextStyle(color: Colors.red)))
@@ -115,11 +114,6 @@ class _ActiveUsersScreenState extends State<ActiveUsersScreen> {
                         );
                       },
                     ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _fetchActiveUsers,
-        backgroundColor: Colorz.blue,
-        child: Icon(Icons.refresh),
-      ),
     );
   }
 }
