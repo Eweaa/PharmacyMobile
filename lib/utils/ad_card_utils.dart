@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:test_applicaiton_1/l10n/app_localizations.dart';
 
 class AdCardUtils {
 
-  static Widget getStatusText(int statusId) {
+  static Widget getStatusText(int statusId, String lang) {
+    
     switch (statusId) {
       case 111:
         return Container(
@@ -15,7 +17,7 @@ class AdCardUtils {
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
-          'Posted',
+          AppLocalizations.translate('status_posted', lang),
           style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -34,7 +36,7 @@ class AdCardUtils {
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
-          'Declined',
+          AppLocalizations.translate('status_declined', lang),
           style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -53,7 +55,7 @@ class AdCardUtils {
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
-          'Pending',
+          AppLocalizations.translate('status_pending', lang),
           style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -72,7 +74,7 @@ class AdCardUtils {
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
-          'Closed',
+          AppLocalizations.translate('status_closed', lang),
           style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -91,7 +93,7 @@ class AdCardUtils {
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
-          'Unknown',
+          AppLocalizations.translate('status_unknown', lang),
           style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -102,13 +104,14 @@ class AdCardUtils {
     }
   }
 
-  static Widget showAcceptBtn(int statusId, int adId, Function(int, int) onAccept) 
+  static Widget showAcceptBtn(int statusId, int adId, Function(int, int) onAccept, String lang) 
   {
     if(statusId != 111)
     {
       return IconButton(
         icon: const Icon(Icons.check_circle, size: 20),
         color: Colors.green,
+        tooltip: AppLocalizations.translate('accept_ad', lang),
         onPressed: () {
           // Call the callback function with ad ID and status ID 111
           onAccept(adId, 111);

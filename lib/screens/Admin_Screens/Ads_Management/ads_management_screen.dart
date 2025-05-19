@@ -208,7 +208,9 @@ class _AdsManagementScreenState extends State<AdsManagementScreen> {
 
   Widget _buildListItem(AdvertisementData ad) {
     final dateFormat = DateFormat('MMM dd, yyyy');
-    
+    final languageProvider = Provider.of<LanguageProvider>(context);
+    final lang = languageProvider.currentLocale.languageCode;
+
     // Transform the image path to a proper URL (same as in _buildAdCard)
     String imageUrl = '';
     if (ad.adImages.isNotEmpty) {
@@ -272,7 +274,7 @@ class _AdsManagementScreenState extends State<AdsManagementScreen> {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      AdCardUtils.getStatusText(ad.statusId)
+                      AdCardUtils.getStatusText(ad.statusId, lang)
                   ],
                     ),
                     const SizedBox(height: 4),
@@ -308,7 +310,7 @@ class _AdsManagementScreenState extends State<AdsManagementScreen> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         const SizedBox(width: 16),
-                        AdCardUtils.showAcceptBtn(ad.statusId, ad.id, _changeAdvertisementStatus),
+                        AdCardUtils.showAcceptBtn(ad.statusId, ad.id, _changeAdvertisementStatus, lang),
                         const SizedBox(width: 16),
                         IconButton(
                           icon: const Icon(Icons.delete, size: 20),
@@ -331,7 +333,9 @@ class _AdsManagementScreenState extends State<AdsManagementScreen> {
   
   Widget _buildAdCard(AdvertisementData ad) {
     final dateFormat = DateFormat('MMM dd, yyyy');
-    
+    final languageProvider = Provider.of<LanguageProvider>(context);
+    final lang = languageProvider.currentLocale.languageCode;
+
     String imageUrl = '';
     if (ad.adImages.isNotEmpty) {
       final String rawPath = ad.adImages.first;
@@ -380,7 +384,7 @@ class _AdsManagementScreenState extends State<AdsManagementScreen> {
                 Positioned(
                   top: 8,
                   right: 8,
-                  child: AdCardUtils.getStatusText(ad.statusId),
+                  child: AdCardUtils.getStatusText(ad.statusId, lang),
                 ),
               ],
             ),
@@ -450,7 +454,7 @@ class _AdsManagementScreenState extends State<AdsManagementScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      AdCardUtils.showAcceptBtn(ad.statusId, ad.id, _changeAdvertisementStatus),
+                      AdCardUtils.showAcceptBtn(ad.statusId, ad.id, _changeAdvertisementStatus, lang),
                       IconButton(
                         icon: const Icon(Icons.delete, size: 20),
                         color: Colors.red,

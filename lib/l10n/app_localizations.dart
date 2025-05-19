@@ -30,6 +30,12 @@ class AppLocalizations {
      'delete': 'Delete',
      'cancel': 'Cancel',
      'delete_ad_message': 'Are you sure you want to delete this advertisement?',
+      'status_posted': 'Posted',
+      'status_declined': 'Declined',
+      'status_pending': 'Pending',
+      'status_closed': 'Closed',
+      'status_unknown': 'Unknown',
+      'accept_ad': 'Accept Advertisement',
     },
     'ar': {
       'app_menu': 'قائمة التطبيق',
@@ -61,6 +67,12 @@ class AppLocalizations {
      'delete': 'حذف',
      'cancel': 'إلغاء',
      'delete_ad_message': 'هل أنت متأكد من أنك تريد حذف هذا الإعلان؟',
+      'status_posted': 'منشور',
+      'status_declined': 'مرفوض',
+      'status_pending': 'قيد الانتظار',
+      'status_closed': 'مغلق',
+      'status_unknown': 'غير معروف',
+      'accept_ad': 'قبول الإعلان',
     },
   };
 

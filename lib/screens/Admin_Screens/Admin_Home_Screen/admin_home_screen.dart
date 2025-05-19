@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_applicaiton_1/l10n/app_localizations.dart';
+import 'package:test_applicaiton_1/providers/language_provider.dart';
 import '../../../layouts/admin_layout.dart';
 import '../../../providers/auth_provider.dart';
 
@@ -32,8 +34,12 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final languageProvider = Provider.of<LanguageProvider>(context);
+    final lang = languageProvider.currentLocale.languageCode;
+    
     return AdminLayout(
-      title: 'Admin Dashboard',
+      title: AppLocalizations.translate('dashboard', lang),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -75,31 +81,6 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     Colors.purple,
                   ),
                 ],
-              ),
-            ),
-            
-            // Token expiration card
-            Card(
-              elevation: 4,
-              margin: const EdgeInsets.only(top: 16),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Admin Session Information',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    const SizedBox(height: 8),
-                    Text('Token Expires: $_tokenExpiration'),
-                    const SizedBox(height: 8),
-                    ElevatedButton(
-                      onPressed: _loadTokenExpiration,
-                      child: const Text('Refresh Token Info'),
-                    ),
-                  ],
-                ),
               ),
             ),
           ],
