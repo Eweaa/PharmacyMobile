@@ -185,7 +185,7 @@ class _AdsManagementScreenState extends State<AdsManagementScreen> {
         crossAxisCount: 2,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
-        childAspectRatio: 0.8,
+        childAspectRatio: 0.6, // Changed from 0.8 to 0.7 to make cards taller
       ),
       itemCount: _advertisements.length,
       itemBuilder: (context, index) {
