@@ -26,6 +26,10 @@ class AppLocalizations {
      'startDate': 'Start Date',
      'city': 'City',
      'area': 'Area',
+     'delete_ad': 'Delete Advertisment',
+     'delete': 'Delete',
+     'cancel': 'Cancel',
+     'delete_ad_message': 'Are you sure you want to delete this advertisement?',
     },
     'ar': {
       'app_menu': 'قائمة التطبيق',
@@ -53,6 +57,10 @@ class AppLocalizations {
       'startDate': 'تاريخ البداية',
      'city': 'المدينة',
      'area': 'المنطقة',
+     'delete_ad': 'حذف الإعلان',
+     'delete': 'حذف',
+     'cancel': 'إلغاء',
+     'delete_ad_message': 'هل أنت متأكد من أنك تريد حذف هذا الإعلان؟',
     },
   };
 

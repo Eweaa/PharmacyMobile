@@ -80,4 +80,38 @@ class AdvertisementData {
       'updatedAt': updatedAt?.toIso8601String(),
     };
   }
+
+  AdvertisementData copyWith({
+    int? id,
+    String? adType,
+    String? description,
+    DateTime? startDate,
+    DateTime? endDate,
+    String? status,
+    int? statusId,
+    double? fees,
+    double? amount,
+    List<String>? adImages,
+    String? createdBy,
+    String? updatedBy,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) {
+    return AdvertisementData(
+      id: id ?? this.id,
+      adType: adType ?? this.adType,
+      description: description ?? this.description,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
+      status: status ?? this.status,
+      statusId: statusId ?? this.statusId,
+      fees: fees ?? this.fees,
+      amount: amount ?? this.amount,
+      adImages: adImages ?? this.adImages,
+      createdBy: createdBy ?? this.createdBy,
+      updatedBy: updatedBy ?? this.updatedBy,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
 }

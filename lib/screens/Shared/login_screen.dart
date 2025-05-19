@@ -10,6 +10,7 @@ import '../Admin_Screens/Admin_Home_Screen/admin_home_screen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:toastification/toastification.dart';
+import 'package:flutter/services.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -24,17 +25,45 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    // Set initial values for email and password
+    _emailController.text = 'admin';
+    _passwordController.text = 'P@ssw0rd';
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controllers when the widget is disposed
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+  
+  @override
   Widget build(BuildContext context) {
     final languageProvider = Provider.of<LanguageProvider>(context);
     final lang = languageProvider.currentLocale.languageCode;
     
+    // Set status bar and navigation bar colors
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // Make status bar transparent
+      statusBarIconBrightness: Brightness.dark, // Dark icons for light background
+      systemNavigationBarColor: Colors.white, // White navigation bar
+      systemNavigationBarIconBrightness: Brightness.dark, // Dark navigation icons
+    ));
+    
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Colors.white, // Change from Theme.of(context).colorScheme.primary
       appBar: PreferredSize(
         preferredSize: Size.zero,
         child: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: Colors.transparent, // Make app bar transparent
           elevation: 0,
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Brightness.dark,
+          ),
         ),
       ),
       body: SafeArea(

@@ -6,8 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:test_applicaiton_1/layouts/admin_layout.dart';
 import 'package:test_applicaiton_1/screens/Admin_Screens/Ads_Management/create_ad_screen.dart';
 import '../../../providers/auth_provider.dart';
-import '../../../models/advertisement.dart';
-import '../../../models/advertisement_data.dart'; // Add this import
+import '../../../models/advertisement_data.dart';
 import '../../../models/base_response.dart';
 import 'package:test_applicaiton_1/l10n/app_localizations.dart';
 import 'package:test_applicaiton_1/providers/language_provider.dart';
@@ -309,38 +308,37 @@ class _AdsManagementScreenState extends State<AdsManagementScreen> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         const SizedBox(width: 16),
-                        AdCardUtils.showAcceptBtn(ad.statusId),
+                        AdCardUtils.showAcceptBtn(ad.statusId, ad.id, _changeAdvertisementStatus),
                         const SizedBox(width: 16),
                         IconButton(
                           icon: const Icon(Icons.delete, size: 20),
                           constraints: const BoxConstraints(),
                           color: Colors.red,
                           onPressed: () {
-                            // Remove advertisement functionality
+                            _showDeleteConfirmation(ad);
                           },
                         ),
                       ],
                     ),
                   ],
+                ),
               ),
-            ),
-          ],
+            ],
+         ),
         ),
-      ),
-    );
+      );
   }
-  // Keep the existing _buildAdCard method
+  
   Widget _buildAdCard(AdvertisementData ad) {
     final dateFormat = DateFormat('MMM dd, yyyy');
     
-    // Transform the image path to a proper URL
     String imageUrl = '';
     if (ad.adImages.isNotEmpty) {
       final String rawPath = ad.adImages.first;
       if (rawPath.contains('images')) {
         final List<String> parts = rawPath.split('images');
         final String filename = parts.last;
-        // Remove any leading backslashes or slashes
+        
         final String cleanFilename = filename.startsWith('\\') || filename.startsWith('/') 
             ? filename.substring(1) 
             : filename;
@@ -452,13 +450,12 @@ class _AdsManagementScreenState extends State<AdsManagementScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      AdCardUtils.showAcceptBtn(ad.statusId),
+                      AdCardUtils.showAcceptBtn(ad.statusId, ad.id, _changeAdvertisementStatus),
                       IconButton(
                         icon: const Icon(Icons.delete, size: 20),
                         color: Colors.red,
                         onPressed: () {
-                          // Delete advertisement functionality
-                          // This would be implemented in a future update
+                          _showDeleteConfirmation(ad);
                         },
                       ),
                     ],
@@ -468,5 +465,116 @@ class _AdsManagementScreenState extends State<AdsManagementScreen> {
       ))],
       ),
     );
+  }
+
+  Future<void> _deleteAdvertisement(int adId) async {
+    try {
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      final token = await authProvider.getAccessToken();
+
+      final response = await http.delete(
+        Uri.parse('https://ph-ocelot.elhamylabs.com/api/UserManagement/DeleteAdvertisement/$adId'),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        setState(() {
+          _advertisements.removeWhere((ad) => ad.id == adId);
+        });
+        
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Advertisement deleted successfully')),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to delete advertisement: ${response.statusCode}')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e')),
+      );
+    }
+  }
+
+  void _showDeleteConfirmation(AdvertisementData ad) {
+    final languageProvider = Provider.of<LanguageProvider>(context, listen: false);
+    final lang = languageProvider.currentLocale.languageCode;
+    
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(AppLocalizations.translate('delete_ad', lang)),
+          content: Text(AppLocalizations.translate('delete_ad_message', lang)),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(AppLocalizations.translate('cancel', lang)),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                _deleteAdvertisement(ad.id);
+              },
+              style: TextButton.styleFrom(foregroundColor: Colors.red),
+              child: Text(AppLocalizations.translate('delete', lang)),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _changeAdvertisementStatus(int adId, int statusId) async {
+    try {
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      final token = await authProvider.getAccessToken();
+
+      final response = await http.get(
+        Uri.parse('https://ph-ocelot.elhamylabs.com/api/UserManagement/ChangeAdvertisementStatus/$adId/$statusId'),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        // Update the ad in the list
+        setState(() {
+          final index = _advertisements.indexWhere((ad) => ad.id == adId);
+          if (index != -1) {
+            _advertisements[index] = _advertisements[index].copyWith(statusId: statusId);
+          }
+        });
+        
+        // Show success message
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Advertisement status updated successfully')),
+          );
+        }
+        
+        // Refresh the list
+        _fetchAdvertisements();
+      } else {
+        // Show error message
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Failed to update advertisement status: ${response.statusCode}')),
+          );
+        }
+      }
+    } catch (e) {
+      // Show error message
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: $e')),
+        );
+      }
+    }
   }
 }

@@ -102,7 +102,7 @@ class AdCardUtils {
     }
   }
 
-  static Widget showAcceptBtn(int statusId) 
+  static Widget showAcceptBtn(int statusId, int adId, Function(int, int) onAccept) 
   {
     if(statusId != 111)
     {
@@ -110,7 +110,8 @@ class AdCardUtils {
         icon: const Icon(Icons.check_circle, size: 20),
         color: Colors.green,
         onPressed: () {
-          // Accept advertisement functionality
+          // Call the callback function with ad ID and status ID 111
+          onAccept(adId, 111);
         },
       );
     }
